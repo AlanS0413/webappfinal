@@ -1,0 +1,54 @@
+extends layout.pug
+block content
+    .container.log.rounded.padded.my-5
+        .row.g-3.align-items-center
+            .form
+                h1.text-warning 
+                    b Sign Up 
+                    h3
+                    p
+                    h.text-warning Please select a username, and a password. Don't worry about any password rules here, we don't really care much about protecting your information - so 
+                    b.text-warning 
+                        code helloworld 
+                    h.text-warning is just fine by us!
+                    p
+
+            form(action="/signup", method = "post") 
+
+                .form.row.g-3
+                    .col-md-3
+                        label(class="form-label", for = 'first') First Name
+                        input(class= "form-control", aria-labelledby="first", name = 'first' required = "").log.bg-gradient.text-warning
+
+
+                    .col-md-3
+                        label(class="form-label",for = 'last') Last Name
+                        input(class= "form-control", aria-labelledby="last",name = 'last' required= "").log.bg-gradient.text-warning
+                    .col-md-6
+                    hr
+
+                    .col-md-3
+                        label(class="form-label", for = 'username') Username
+                        input(class= "form-control", aria-labelledby="username",type='text', name = 'username' required="").log.bg-gradient.text-warning
+                    .col-md-9
+
+                    .col-md-3
+                        label(class="form-label", for = 'password') Password
+                        input(class= "form-control", aria-labelledby="password",type = 'password' name = 'signuppassword' required="").log.bg-gradient.text-warning
+                    .col-md-9
+
+                    .col-md-3
+                        label(class="form-label",for = 'confirmpassword') Confirm Password
+                        input(class= "form-control", aria-labelledby="confirmpassword",type = 'password' name = 'confirmpassword' required="").log.bg-gradient.text-warning
+                    .col-md-9
+                    hr
+            
+                p
+                    button.btn.btn-outline-primary(type='submit') Sign Up
+                    a.btn.btn-link(href='/') Nevermind
+                if message 
+                    p #{message}
+                p 
+                b.text-warning Already have an account?
+                    a.btn.btn-link(href='/login') Sign in Here!
+                p

@@ -1,0 +1,38 @@
+/* style.css */
+
+form {
+    background-color: maroon!important;
+    font-size:medium;
+    font-family:Arial, Helvetica, sans-serif;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.form {
+    background-color: maroon!important;
+    font-size:medium;
+    font-family:Arial, Helvetica, sans-serif;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+#map-container {
+    position:relative;
+    height:700px;
+    margin-bottom:5rem;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 75%;
+}
+
+tr {
+    cursor: pointer;
+}
+ 

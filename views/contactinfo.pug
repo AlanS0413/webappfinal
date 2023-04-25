@@ -1,0 +1,73 @@
+extends layout.pug
+
+mixin getContactList(contact)
+    ul  
+        each contact in contacts 
+            li 
+
+block content
+    body
+        .container.padded
+            .row.align-items-center
+                .col-6.text-begin
+                    h1
+                        b Contact Info
+                .col-6.text-end
+                    a.btn.btn-link.btn-md.text-black(href= '/') Back to list
+            .form.rounded
+                h2.text-white 
+                    b= contact.firstname  + " " + contact.lastname
+                p.text-white  
+                    b Phone Number: 
+                    span= contact.phonenumber 
+                p.text-white   
+                    i.text-white    
+                        if contact.contactByPhone === 1
+                            p May be contacted by phone or text
+                        else 
+                            p 
+                            h May 
+                                b NOT 
+                            h be contacted by phone or text
+
+                p.text-white 
+                    b Email Address: 
+                    span= contact.email 
+
+                        i.text-white  
+                            if contact.contactByEmail === 1
+                                p May be contacted by email 
+                            else 
+                                p 
+                                h May 
+                                    b NOT 
+                                h be contacted by email
+
+                p.text-white  
+                    b Address:
+
+                    .text-white 
+                        section= contact.street
+                        section
+                        span= contact.city
+                        span , 
+                        span= contact.state
+                        span= " " 
+                        span= contact.zip 
+
+                        section= contact.country
+                    br
+                    i.text-white 
+                        if contact.contactByMail === 1
+                            p May be contacted by mail 
+                        else 
+                            p 
+                            h May 
+                                b NOT 
+                            h be contacted by mail
+
+                .btn-group.rounded.col-lg-3(role="group" aria-label="Basic outlined example")
+                        a.btn.btn-group.btn-outline-primary.text-white.btn-md(href=`/${contact.id}/edit`) Edit Contact  
+                        a.btn.btn-group.btn-outline-danger.text-white.btn-md(href=`/${contact.id}/delete`) Delete Contact
+
+

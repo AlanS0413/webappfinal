@@ -1,0 +1,48 @@
+extends layout.pug
+
+mixin getContactList(contact)
+    ul  
+        each contact in contacts 
+            li 
+
+block content
+    body
+            .container.rounded.padded
+                .row.align-items-center
+                    .col-6.text-begin
+                        h1
+                            b Contact List
+                    .col-6.text-end.padded
+                        a.btn.btn-outline-primary.btn-md(href= '/create') Create a new contact 
+                ul.list-group.text-center
+                        each contact in contacts
+                            .container.justify-content-center.border.rounded
+                                .row.gy-3
+                                    .col-lg-1
+                                        a.text-white(href=`/${contact.id}`)= contact.firstname + ' ' + contact.lastname
+                                    .col-lg-2
+                                        p.text-white=contact.phonenumber
+                                    .col-lg-3
+                                        p.text-white=contact.email
+                                    .col-lg-4
+                                        p.text-white=contact.street + ' ' + contact.city + ', ' + contact.state + ' ' + contact.zip
+                                        p.text-white=contact.country
+                                    .col-lg-2
+                                        .btn-group-vertical(role='group')
+                                            .row.justify-content-evenly
+                                                .col
+                                                    input(id=`${contact.contactByPhone}-phone`, type="checkbox", disabled="", checked=contact.contactByPhone === 1 ? true : false)  
+                                                    label(for=`${contact.id}-phone`) Phone
+                        
+                                            .row.justify-content-evenly.text-white
+                                                .col
+                                                    input(id=`${contact.contactByEmail}-email`, type="checkbox", disabled="", checked=contact.contactByEmail === 1 ? true : false)
+                                                    label(for=`${contact.id}-email`) Email
+                                    
+                                            .row.justify-content-evenly.text-white
+                                                .col
+                                                    input(id=`${contact.contactByMail}-mail`, type="checkbox", disabled="", checked=contact.contactByMail === 1 ? true : false)
+                                                    label(for=`${contact.id}-mail`) Mail    
+
+
+

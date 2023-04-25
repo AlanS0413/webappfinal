@@ -1,0 +1,89 @@
+extends layout.pug
+
+mixin getContactList(contact)
+    ul  
+        each contact in contacts 
+            li 
+
+block content 
+    style.
+        input.form-control::placeholder{
+        color: black;}
+    .container.padded
+        .row.g-3.align-items-center
+            h1
+                b Update Contact
+            each contact in contacts
+                form(action= `/${contact.id}/edit`, method = "post")
+                    .form.text-white
+                        h3 Basic Info
+                        .form.row.g-3.rounded
+                            .col-md-4
+                                label(class="form-label", for="firstname") First Name:  
+                                input(class= "form-control", aria-labelledby="firstname", type="text", name = 'firstname', value=`${contact.firstname}`, style="color: black;")
+                                
+
+                            .col-md-4 
+                                label(class="form-label", for="lastname") Last Name: 
+                                input(class= "form-control", aria-labelledby="lastname",type="text", name = 'lastname', value=`${contact.lastname}`, style="color: black;")
+                                
+                            .col-md-4
+
+                            .col-md-3
+                                label(class="form-label", for="phonenumber") Phone Number: 
+                                input(class= "form-control", aria-labelledby="phonenumber", type="text", name = 'phonenumber', value=`${contact.phonenumber}`, style="color: black;")
+                                
+                            .col-md-1 
+
+                            .col-md-4
+                                label(class="form-label", for="email") E-mail: 
+                                input(class= "form-control", aria-labelledby="email",type="text", name = 'email', value=`${contact.email}`, style="color: black;")
+                            .col-md-4
+
+                            .col-md-12 
+                                h3 Address 
+                            .col-md-5
+                                label(class="form-label", for="street") Street: 
+                                input(class= "form-control", aria-labelledby="street", type="text", name = "street", value=`${contact.street}`, style="color: black;")
+                            
+
+                            .col-md-3
+                                label(class="form-label", for="city") City: 
+                                input(class= "form-control", aria-labelledby="city",type="text", name = 'city', value=`${contact.city}`, style="color: black;")
+                            .col-md-3
+
+                            .col-md-2
+                                label(class="form-label", for="state") State: 
+                                input(class= "form-control", aria-labelledby="state", type="text", name = 'state', value=`${contact.state}`, style="color: black;")
+                            
+
+                            .col-md-2 
+                                label(class="form-label", for="zip") Zip: 
+                                input(class= "form-control", aria-labelledby="zip", type="text" name = "zip", value=`${contact.zip}`, style="color: black;")
+                                
+
+                            .col-md-2
+                                label(class="form-label", for="country") Country: 
+                                input(class= "form-control", aria-labelledby="country", type="text", name = 'country', value=`${contact.country}`, style="color: black;")
+                            
+                            .col-md-6
+                        
+                    
+                            .col-md-12
+                                h3 Contact Preferences 
+                                .col-md-12.my-1
+                                input(aria-labelledby="contact_by_phone", class= "form-check-input", id=`${contact.contactByPhone}`, type='checkbox', name = "contact_by_phone", value=`${contact.contactByPhone}`, checked= contact.contactByPhone === 1 ? true : false)
+                                label(class= "form-check-label", for=`${contact.contactByPhone}`) Contact By Phone
+                                
+
+                                .col-md-12.my-1 
+                                input(aria-labelledby="contact_by_email", class= "form-check-input", id=`${contact.contactByEmail}`, type='checkbox', name = "contact_by_email", value=`${contact.contactByEmail}`, checked= contact.contactByEmail === 1 ? true : false)
+                                label(class= "form-check-label", for=`${contact.contactByEmail}`) Contact By Email 
+                                
+
+                                .col-md-12.my-1 
+                                input(aria-labelledby="contact_by_mail", class= "form-check-input", id=`${contact.contactByMail}`, type='checkbox', name = "contact_by_mail", value=`${contact.contactByMail}`, checked= contact.contactByMail === 1 ? true : false)
+                                label(class= "form-check-label", for=`${contact.contactByMail}`) Contact By Mail 
+                    .my-2           
+                    button.btn.btn-outline-primary.text-white(type="submit") Save 
+                    a.btn.btn-link.text-white(href="/") Cancel
