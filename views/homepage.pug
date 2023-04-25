@@ -13,7 +13,7 @@ block content
                         h1
                             b Contact List
                     .col-6.text-end.padded
-                        a.btn.btn-outline-primary.btn-md(href= '/create') Create a new contact 
+                        a.btn.btn-outline-primary.btn-md(href= '/create') Create a new contact
                 ul.list-group.text-center
                         each contact in contacts
                             .container.justify-content-center.border.rounded
@@ -31,18 +31,18 @@ block content
                                         .btn-group-vertical(role='group')
                                             .row.justify-content-evenly
                                                 .col
-                                                    input(id=`${contact.contactByPhone}-phone`, type="checkbox", disabled="", checked=contact.contactByPhone === 1 ? true : false)  
+                                                    input(id=`${contact.contactByPhone}-phone`, type="checkbox", disabled="", checked=contact.contactByPhone === 1 ? true : false)
                                                     label(for=`${contact.id}-phone`) Phone
-                        
+
                                             .row.justify-content-evenly.text-white
                                                 .col
                                                     input(id=`${contact.contactByEmail}-email`, type="checkbox", disabled="", checked=contact.contactByEmail === 1 ? true : false)
                                                     label(for=`${contact.id}-email`) Email
-                                    
+
                                             .row.justify-content-evenly.text-white
                                                 .col
                                                     input(id=`${contact.contactByMail}-mail`, type="checkbox", disabled="", checked=contact.contactByMail === 1 ? true : false)
-                                                    label(for=`${contact.id}-mail`) Mail    
+                                                    label(for=`${contact.id}-mail`) Mail
 
 
 

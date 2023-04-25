@@ -11,7 +11,6 @@ const app = express();
 app.use(express.urlencoded({extended: true}));
 
 app.use((req, res, next) => {
-    console.log("Sending DB to request");
     req.db = db;
     next();
 })
@@ -38,6 +37,7 @@ app.set('view engine', 'pug');
 
 app.locals.pretty = true;
 
+app.use(express.static('public/styles'));
 
 app.use('/', require('./routes/startup'));
 app.use('/', require('./routes/login'));
