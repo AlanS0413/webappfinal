@@ -8,19 +8,27 @@ block content
             h1
                 b Create Contact
             form(action="/create", method = "post")
-                .form.text-white
-                    h3 Basic Info
-                    .form.row.g-3.rounded
+                .form
+                    h2
+                        b.text-black Basic Info
+                    .form.row.g-3.rounded.text-white
+                        .col-md-1
+                            label(class="form-label", for="prefix") Prefix
+                            select.form-select(name ="prefix" aria-label="prefix")
+                                option(selected) Mr.
+                                    option(value="1") Miss.
+                                    option(value="2") Mrs.
+
                         .col-md-4
                             label(class="form-label", for="firstname") First Name
-                            input(type="text", name = 'firstname', class= "form-control custom-input", aria-labelledby="firstname", placeholder = "First Name" require="", style="color: black;")
-                            
+                            input(type="text", name = 'firstname', class= "form-control custom-input", aria-labelledby="firstname", placeholder = "First Name", required, style="color: black;")
+
 
                         .col-md-4
                             label(class="form-label", for="lastname") Last Name
-                            input(type="text", name = 'lastname', class= "form-control", aria-labelledby="lastname", placeholder = "Last Name", style="color: black;")
-                            
-                        .col-md-4
+                            input(type="text", name = 'lastname', class= "form-control", aria-labelledby="lastname", placeholder = "Last Name", required, style="color: black;")
+
+                        .col-md-3
 
                         .col-md-3
                             label(class="form-label", for="phonenumber") Phone Number
@@ -33,47 +41,49 @@ block content
 
 
                         .col-md-12
-                            h3 Address
+                            h3
+                                b Address
                         .col-md-5
                             label(class="form-label", for="street") Street
-                            input(type="text", name = "street", class= "form-control", aria-labelledby="street", placeholder = "Street", style="color: black;")
+                            input(type="text", name = "street", class= "form-control", aria-labelledby="street", placeholder = "Street", required style="color: black;")
 
                         .col-md-3
                             label(class="form-label", for="city") City
-                            input(type="text", name = 'city', class= "form-control", aria-labelledby="city",  placeholder = "City", style="color: black;")
+                            input(type="text", name = 'city', class= "form-control", aria-labelledby="city",  placeholder = "City", required, style="color: black;")
                         .col-md-3
 
                         .col-md-2
                             label(class="form-label", for="state") State
-                            input(type="text", name = 'state', class= "form-control", aria-labelledby="state", placeholder = "State", style="color: black;")
-                            
+                            input(type="text", name = 'state', class= "form-control", aria-labelledby="state", placeholder = "State", required, style="color: black;")
+
 
                         .col-md-2
                             label(class="form-label", for="zip") Zip
-                            input(type="text" name = "zip", class= "form-control", aria-labelledby="zip", placeholder = "Zip", style="color: black;")
-                            
+                            input(type="text" name = "zip", class= "form-control", aria-labelledby="zip", placeholder = "Zip", required, style="color: black;")
+
 
                         .col-md-2
                             label(class="form-label", for="country") Country
-                            input(type="text", name = 'country', class= "form-control", aria-labelledby="country", placeholder = "Country", style="color: black;")
-                            
+                            input(type="text", name = 'country', class= "form-control", aria-labelledby="country", placeholder = "Country", required, style="color: black;")
+
                         .col-md-6
 
                         .col-md-12
-                            h3 Contact Preferences 
+                            h3
+                                b Contact Preferences
+
+                            .col-md-12.my-1
+                            input(type="checkbox" name = "contact_by_email", class= "form-check-input", unchecked = contact_by_email, aria-labelledby="contact_by_email")
+                            label(class="form-check-label", for="contact_by_email") Contact By Email
+
                             .col-md-12.my-1
                             input(type="checkbox" name = "contact_by_phone", class= "form-check-input", unchecked = contact_by_phone, aria-labelledby="contact_by_phone")
                             label(class="form-check-label", for="contact_by_phone") Contact By Phone
 
                             .col-md-12.my-1
-                            input(type="checkbox" name = "contact_by_email", class= "form-check-input", unchecked = contact_by_email, aria-labelledby="contact_by_email")
-                            label(class="form-check-label", for="contact_by_email") Contact By Email 
-                            
-
-                            .col-md-12.my-1
                             input(type="checkbox" name = "contact_by_mail", class= "form-check-input", unchecked = contact_by_mail, aria-labelledby="contact_by_mail")
-                            label(class= "form-check-label" ,for="contact_by_mail") Contact By Mail 
-                        
-                .my-2
-                button.btn.btn-outline-primary.text-white(type="submit") Add 
-                a.btn.btn-link.text-white(href="/") Cancel
+                            label(class= "form-check-label" ,for="contact_by_mail") Contact By Mail
+                            br
+                            .my-2
+                            button.btn.btn-outline-primary.text-white(type="submit") Add
+                            a.btn.btn-link.text-white(href="/") Cancel

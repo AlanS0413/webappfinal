@@ -6,29 +6,29 @@ block content
                     .card-header
                         h1.card-title.text-black
                             b Sign in
-                            form.form(action="/login", method = "post") 
+                            form.form(action="/login", method = "post")
                                 .container.row.justify-content-center
                                     .row
                                         .col-lg-2.sm-2.my-2
                                         label.text-white(for="username") Username
                                         input(type="text" name="username").rounded
-                                        
+
                                         .col-lg-2.my-2
                                         label.text-white(for="password") Password
                                         input(type="password" name="password").rounded
-                                        
+
                                         .col-lg-2.my-2
                                         button.btn.btn-outline-primary.text-white(type="submit") Sign in
-                                        if message 
+                                        if message
                                             p #{message}
                                         .col-lg-2.my-2
                                         a.btn.btn-outline-danger(href='/') Nevermind
-                                        
+
                                         .col-lg-2.my-2
                                         span.text-white Don't have an account yet?
-                                        .col-lg-2.my-2 
+                                        .col-lg-2.my-2
                                         a.btn.btn-outline-primary.btn-md(href='/signup') Sign up Here!
                                         p
-                                        
+
 
 

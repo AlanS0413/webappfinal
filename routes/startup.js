@@ -6,4 +6,8 @@ router.get('/', async (req, res) => {
     res.render('homepage', { title: 'Homepage', show_login: true, contacts });
 });
 
+
+
+
+
 module.exports = router;

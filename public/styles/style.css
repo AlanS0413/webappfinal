@@ -1,5 +1,44 @@
 /* style.css */
 
+@media screen and (max-width: 600px) {
+    label[for="contactbyphone"],
+    label[for="contactbyemail"],
+    label[for="contactbymail"],
+    a[class= "btn btn-link view-button"],
+    input[type="checkbox"]:checked + label[for="contactbyphone"]::before,
+    input[type="checkbox"]:checked + label[for="contactbyemail"]::before,
+    input[type="checkbox"]:checked + label[for="contactbymail"]::before
+    {
+      display: flex;
+      justify-content: center;
+    }
+}
+@media screen and (max-width: 800px) {
+    label[for="contactbyphone"],
+    label[for="contactbyemail"],
+    label[for="contactbymail"],
+    a[class= "btn btn-link view-button"],
+    input[type="checkbox"]:checked + label[for="contactbyphone"]::before,
+    input[type="checkbox"]:checked + label[for="contactbyemail"]::before,
+    input[type="checkbox"]:checked + label[for="contactbymail"]::before
+    {
+      display: flex;
+      justify-content: center;
+    }
+}
+@media screen and (max-width: 1000px) {
+    label[for="contactbyphone"],
+    label[for="contactbyemail"],
+    label[for="contactbymail"],
+    a[class= "btn btn-link view-button"],
+    input[type="checkbox"]:checked + label[for="contactbyphone"]::before,
+    input[type="checkbox"]:checked + label[for="contactbyemail"]::before,
+    input[type="checkbox"]:checked + label[for="contactbymail"]::before
+    {
+      justify-content: center;
+    }
+}
+
 h1 {
     color:black;
     font-size: 2rem;
@@ -10,6 +49,11 @@ h1 {
     background-color: maroon!important;
 }
 
+h2 {
+    color: black;
+    font-size:medium;
+    font-family:Arial, Helvetica, sans-serif;
+}
 
 
 h3 {
@@ -18,13 +62,6 @@ h3 {
     font-family:Arial, Helvetica, sans-serif;
 }
 
-label {
-    display: block;
-    margin-bottom: 0.25rem;
-    color: white;
-    font-size:medium;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-}
 
 form {
     background-color: maroon!important;
@@ -101,7 +138,54 @@ ul.navbar.navbar-expand-sm.bars.d-flex.justify-content-end {
     width: 75%;
 }
 
-tr {
+.pointer {
     cursor: pointer;
 }
- 
+
+.position{
+    position:relative;
+    left: -3%;
+    right: -3%;
+    padding-top: 1rem;
+}
+input[disabled=""]{
+    display:none;
+}
+
+label[for="contactbyphone"], label[for="contactbyemail"], label[for="contactbymail"] {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    color: #ffffff;
+    padding-bottom: 3px;
+}
+
+label[for="contactbyphone"]::before, label[for="contactbyemail"]::before, label[for="contactbymail"]::before {
+    content: "";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.24);
+}
+
+input[type="checkbox"]:checked + label[for="contactbyphone"]::before,
+input[type="checkbox"]:checked + label[for="contactbyemail"]::before,
+input[type="checkbox"]:checked + label[for="contactbymail"]::before {
+    content: "\2713";
+    color: #000000;
+    font-size: 18px;
+    line-height: 12px;
+}
+
+a[class= "btn btn-link view-button"]{
+    display:flex;
+    padding-top: 1.5rem;
+    color: #ffffff
+}
+
+.row{
+    cursor: pointer;
+}

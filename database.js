@@ -46,7 +46,6 @@ class ContactDB{
             console.log('User created with username cmps369 and password rcnj')
         }
 
-        
     }
 
     async createUser(first, last, username, password) {
@@ -58,21 +57,21 @@ class ContactDB{
         ])
         return id;
     }
-    
 
 
-    async createContact(firstname, lastname, email, phonenumber, street, city, state, zip, country, contact_by_phone, contact_by_email, contact_by_mail, prefix, lat, lng) {
+
+    async createContact(prefix, firstname, lastname, email, phonenumber, street, city, state, zip, country, contact_by_phone, contact_by_email, contact_by_mail, lat, lng) {
         const id = await this.db.create('Contact', [
             {column: 'prefix', value: prefix},
             { column: 'firstname', value: firstname },
             { column: 'lastname', value: lastname },
             { column: 'email', value: email },
             { column: 'phonenumber', value: phonenumber },
-            { column: 'street', value: street },
-            { column: 'city', value: city },
-            { column: 'state', value: state },
-            { column: 'zip', value: zip },
-            { column: 'country', value: country },
+            { column: 'street', value: street},
+            { column: 'city', value: city},
+            { column: 'state', value: state},
+            { column: 'zip', value: zip},
+            { column: 'country', value: country},
             { column: 'contactByEmail', value: contact_by_email },
             { column: 'contactByPhone', value: contact_by_phone },
             { column: 'contactByMail', value: contact_by_mail },
@@ -100,7 +99,7 @@ class ContactDB{
 
     async findrcnjUser(user_Id){
         const defaltUser = await this.db.read('Users', [{ column: 'username', value: 'cmps369' }, { column: 'password', value: 'rcnj' }], {column: 'id', value: user_Id});
-        if(defaltUser.lenght > []) 
+        if(defaltUser.lenght > [])
             creatercnj = await this.db.createUser('admin', 'admin', 'cmps369', 'rcnj');
             else
                 return undefined;
@@ -111,21 +110,45 @@ class ContactDB{
         return contacts;
     }
 
-    async updateContactData(firstname, lastname, email, phonenumber, street, city, state, zip, country, contact_by_phone, contact_by_email, contact_by_mail, id) {
+    async updateContactData(prefix, firstname, lastname, email, phonenumber, street, city, state, zip, country, contact_by_phone, contact_by_email, contact_by_mail, id, lat, lng) {
         await this.db.update('Contact',[
-          { column: 'firstname', value: firstname },
-          { column: 'lastname', value: lastname },
-          { column: 'phonenumber', value: phonenumber },
-          { column: 'email', value: email },
-          { column: 'street', value: street },
-          { column: 'city', value: city },
-          { column: 'state', value: state },
-          { column: 'zip', value: zip },
-          { column: 'country', value: country },
-          { column: 'contactByPhone', value: contact_by_phone },
-          { column: 'contactByEmail', value: contact_by_email },
-          { column: 'contactByMail', value: contact_by_mail }
+            {column: 'prefix', value: prefix},
+            { column: 'firstname', value: firstname },
+            { column: 'lastname', value: lastname },
+            { column: 'email', value: email },
+            { column: 'phonenumber', value: phonenumber },
+            { column: 'street', value: street},
+            { column: 'city', value: city},
+            { column: 'state', value: state},
+            { column: 'zip', value: zip},
+            { column: 'country', value: country},
+            { column: 'contactByEmail', value: contact_by_email },
+            { column: 'contactByPhone', value: contact_by_phone },
+            { column: 'contactByMail', value: contact_by_mail },
+            { column: 'lat', value: lat},
+            { column: 'lng', value: lng}
         ], [{ column: 'id', value: id }])
+    }
+
+    async findAddresses(address){
+        const newaddys = await this.db.read('Contact', [{ column: 'address', value: address}]);
+        return newaddys;
+    }
+
+    async updateCoords(lat, lng){
+        await this.db.update('Contact', [
+            { column: 'lat', value: lat},
+            { column: 'lng', value: lng}
+        ], [{ column: 'id', value: id }])
+    }
+
+    async findContactCoords(id, firstname,  lat, lng){
+        const frontadd = await this.db.read('Contact',
+        [{ column: 'id', value: id }],
+        [{ column: 'firstname', value: firstname }],
+        [{ column: 'lat', value: lat}],
+        [{ column: 'lng', value: lng}])
+        return frontadd;
     }
 
     async deleteContact(id) {

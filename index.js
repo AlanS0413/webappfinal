@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const session = require('express-session');
 const Database = require('./database.js');
 const db = new Database('contact.db');
@@ -37,8 +38,14 @@ app.set('view engine', 'pug');
 
 app.locals.pretty = true;
 
+app.use(express.static('public'));
 app.use(express.static('public/styles'));
+app.use(bodyParser.json());
 
+app.get('/data', async (req, res) => {
+    const data = await req.db.findAllContacts();
+    res.json(data);
+});
 app.use('/', require('./routes/startup'));
 app.use('/', require('./routes/login'));
 app.use('/', require('./routes/logout'));
@@ -46,7 +53,6 @@ app.use('/', require('./routes/ids'));
 app.use('/', require('./routes/contactlists'));
 app.use('/', require('./routes/editcontact'));
 app.use('/', require('./routes/deletecontact'));
-app.use('/', require('./routes/places'));
 
 
 
