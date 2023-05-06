@@ -110,6 +110,11 @@ class ContactDB{
         return contacts;
     }
 
+    async findContactByName(firstname) {
+        const cname = await this.db.read('Contact', [{ column: 'firstname', value: firstname }]);
+        return cname;
+    }
+
     async updateContactData(prefix, firstname, lastname, email, phonenumber, street, city, state, zip, country, contact_by_phone, contact_by_email, contact_by_mail, id, lat, lng) {
         await this.db.update('Contact',[
             {column: 'prefix', value: prefix},

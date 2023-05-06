@@ -15,10 +15,18 @@ html
             if user
                 span
                     ul.navbar.navbar-expand-sm.bars.d-flex.justify-content-end
-                        span.text-black.mx-2
-                            b   Logged in #{user.username}
-                        a.btn.btn-outline-danger.btn-md.mx-3(href='/logout') Logout
+                        form#search(role="search" action="/search/", method = "GET" class="d-flex align-items-center")
+                            input#searchdata.form-control(type="search", placeholder="Search", aria-label="Search")
+                            button.btn.btn-outline-success.mx-2(type="submit") Search
+                        .col.justify-content-end.text-end
+                                span.text-black.mx-2
+                                    b   User #{user.username}
+                                a.btn.btn-outline-danger.btn-md.mx-3(href='/logout') Logout
             else
                 ul.navbar.navbar-expand-sm.bars.d-flex.justify-content-end
-                    a.btn.btn-outline-primary.btn-md.mx-3(href='/login') Sign in
+                    form#search(role="search" action= "/search/", method="GET" class="d-flex align-items-center")
+                        input#searchdata.form-control(type="search", placeholder="Search", aria-label="Search")
+                        button.btn.btn-outline-success.mx-2.ml-auto(type="submit") Search
+                    .col.justify-content-end.text-end
+                        a.btn.btn-outline-primary.btn-md.mx-3(href='/login') Sign in
         block content

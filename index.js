@@ -32,8 +32,6 @@ app.use((req, res, next)=>{
     }
     next();
 });
-
-
 app.set('view engine', 'pug');
 
 app.locals.pretty = true;
@@ -41,6 +39,18 @@ app.locals.pretty = true;
 app.use(express.static('public'));
 app.use(express.static('public/styles'));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.get('/search/:key', async (req, res) => {
+    let data = await db.findAllContacts({
+        "$or":[
+            {firstnames:{$regex:req.params.key}},
+            {lastnames:{$regex:req.params.key}},
+            {email:{$regex:req.params.key}}
+        ]
+    })
+    res.send(data)
+});
 
 app.get('/data', async (req, res) => {
     const data = await req.db.findAllContacts();
@@ -53,7 +63,6 @@ app.use('/', require('./routes/ids'));
 app.use('/', require('./routes/contactlists'));
 app.use('/', require('./routes/editcontact'));
 app.use('/', require('./routes/deletecontact'));
-
 
 
 app.listen(8080, () => {

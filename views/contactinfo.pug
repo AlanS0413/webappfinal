@@ -18,7 +18,7 @@ block content
                 h2.text-white
                     b= contact.firstname  + " " + contact.lastname
                 p.text-white
-                    b Phone Number:
+                    b Phone Number: 
                     span= contact.phonenumber
                 p.text-white
                     i.text-white
@@ -47,7 +47,8 @@ block content
                     b Address:
 
                     .text-white
-                        section=contact.address
+                        section=contact.street + ' ' + contact.city + ' ' + contact.state+","
+                            p=contact.zip + ' '+ contact.country
 
                     br
                     i.text-white

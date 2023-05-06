@@ -1,7 +1,6 @@
 
 const markers = [];
 let map;
-console.log(markers, "Markers Array")
 function addMarker(){
 $.ajax({
   url: '/data',
@@ -23,135 +22,69 @@ $.ajax({
 
 }
 const on_row_click = (e) => {
-  console.log("onclick")
-  let row = e.target.closest('.row');
-  if (!row) {
+  let li = e.target.closest('li');
+  if (!li) {
+    if (e.target.tagName.toUpperCase() === 'LI') {
+      li = e.target.parentNode;
+    }
     return;
   }
 
-  // Get data attributes from row
-  const lat = row.dataset.lat;
-  const lng = row.dataset.lng;
-  console.log(lat, lng);
+  let lat = e.target.dataset.lat;
+  let lng = e.target.dataset.lng;
+  let target = e.target;
 
-  // Update map
+  while ((!lat || !lng) && target.parentNode) {
+    target = target.parentNode;
+    lat = target.dataset.lat;
+    lng = target.dataset.lng;
+  }
+
+
   map.flyTo(new L.LatLng(lat, lng));
 };
 
-
+const viewContact = async (id) => {
+  window.location.href = `/${id}`;
+}
+let users = []
 const loadPlaces = async () => {
   const response = await axios.get('/data');
-  const listItems = document.querySelector('#contact-list-item');
-  const container = document.getElementById('listcontainer');
-  listItems.addEventListener('click', on_row_click);
-  if (response && response.data) {
-    for (const contact of response.data) {
-      const row = document.createElement('div');
-      row.classList.add('row');
-      row.id = 'rowitem';
-
-      row.dataset.lat = contact.lat;
-      row.dataset.lng = contact.lng;
-      row.onclick = on_row_click;
-      console.log(row, "row");
-
-      // Add row to the container
-      container.appendChild(row);
-      console.log(container, row, "li and rows")
-
-      const col1 = document.createElement('div');
-      col1.classList.add('col-lg-2');
-      const p1 = document.createElement('p');
-      p1.classList.add('text-white');
-      p1.textContent = `${contact.prefix} ${contact.firstname} ${contact.lastname}`;
-      col1.appendChild(p1);
-      row.appendChild(col1);
-
-      const col2 = document.createElement('div');
-      col2.classList.add('col-lg-2');
-      const p2 = document.createElement('p');
-      p2.classList.add('text-white');
-      p2.textContent = contact.phonenumber;
-      col2.appendChild(p2);
-      row.appendChild(col2);
-
-      const col3 = document.createElement('div');
-      col3.classList.add('col-lg-3');
-      const p3 = document.createElement('p');
-      p3.classList.add('text-white');
-      p3.textContent = contact.email;
-      col3.appendChild(p3);
-      row.appendChild(col3);
-
-      const col4 = document.createElement('div');
-      col4.classList.add('col-lg-3');
-      const p4 = document.createElement('p');
-      p4.classList.add('text-white');
-      p4.textContent = `${contact.street} ${contact.city}, ${contact.state} ${contact.zip} ${contact.country}`;
-      col4.appendChild(p4);
-      row.appendChild(col4);
-
-      const col5 = document.createElement('div');
-      col5.classList.add('col-lg-1');
-      const btnGroup = document.createElement('div');
-      btnGroup.classList.add('btn-group', 'flex-column');
-      btnGroup.setAttribute('role', 'group');
-
-      const label1 = document.createElement('label');
-      label1.htmlFor = `contactbyphone`;
-      label1.textContent = 'Phone';
-      const input1 = document.createElement('input');
-      input1.id = `${contact.contactByPhone}-phone`;
-      input1.type = 'checkbox';
-      input1.disabled = true;
-      input1.checked = contact.contactByPhone === 1;
-      col5.appendChild(input1);
-      col5.appendChild(label1);
-      row.appendChild(col5);
-
-      const col7 = document.createElement('div');
-      col7.classList.add('col-lg-1');
-      const label2 = document.createElement('label');
-      label2.htmlFor = `contactbyemail`;
-      label2.textContent = 'Email';
-      const input2 = document.createElement('input');
-      input2.id = `${contact.contactByEmail}-email`;
-      input2.type = 'checkbox';
-      input2.disabled = true;
-      input2.checked = contact.contactByEmail === 1;
-      col5.appendChild(input2);
-      col5.appendChild(label2);
-      row.appendChild(col5);
-
-      const col8 = document.createElement('div');
-      col8.classList.add('col-lg-1');
-      const label3 = document.createElement('label');
-      label3.htmlFor = `contactbymail`;
-      label3.textContent = 'Mail';
-      const input3 = document.createElement('input');
-      input3.id = `${contact.contactByMail}-mail`;
-      input3.type = 'checkbox';
-      input3.disabled = true;
-      input3.checked = contact.contactByMail === 1;
-      col5.appendChild(input3);
-      col5.appendChild(label3);
-      row.appendChild(col5);
-
-      const col9 = document.createElement('div');
-      col9.classList.add('col');
-      const btn = document.createElement('a');
-      btn.classList.add('btn', 'btn-link', 'view-button');
-      btn.textContent = 'View';
-      btn.href = `${contact.id}`;
-      col9.appendChild(btn);
-      row.appendChild(col9);
-
-
-      listItems.appendChild(row);
+  const ubody = document.querySelector('ul#contact-list')
+  document.addEventListener('click', function(event) {
+    if (event.target.tagName === 'LI' || event.target.parentNode.tagName === 'LI') {
+      const lat = event.target.dataset.lat || event.target.parentNode.dataset.lat;
+      const lng = event.target.dataset.lng || event.target.parentNode.dataset.lng;
+    }
+  });
+  if (response && response.data){
+    for (const item of response.data){
+    const listitem = document.createElement('li');
+    listitem.dataset.lat = item.lat;
+    listitem.dataset.lng = item.lng;
+    ubody.onclick = on_row_click;
+    listitem.innerHTML = `
+      <hr>
+      <li id="name"> ${item.prefix} ${item.firstname} ${item.lastname} </li>
+      <li id ="phonenumber"> ${item.phonenumber} </li>
+      <li id="email"> ${item.email} </li>
+      <li id="address"> ${item.street +' ' + item.city +' '+ item.state +', '+ item.country}</li>
+      <input id="${item.contactByPhone}-phone" type="checkbox" disabled="" ${item.contactByPhone === 1 ? 'checked' : ''}><label for="${item.id}-phone">Phone</label>
+      <input id="${item.contactByEmail}-email" type="checkbox" disabled="" ${item.contactByEmail === 1 ? 'checked' : ''}><label for="${item.id}-email">Email</label>
+      <input id="${item.contactByMail}-mail" type="checkbox" disabled="" ${item.contactByMail === 1 ? 'checked' : ''}><label for="${item.id}-mail">Mail</label>
+      <li>
+        <button class='btn btn-link text-white' onclick='viewContact(${item.id})'>View</button>
+      </li>
+      <hr>
+    `;
+    ubody.appendChild(listitem);
+    users.push({ name: item.firstname, last: item.lastname, element: listitem });
+    console.log(item.lat, item.lng, "items")
     }
   }
-  addMarker();
+  addMarker()
 }
+
 
 
 const map_init = async () => {
@@ -160,4 +93,29 @@ const map_init = async () => {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map);
+}
+
+
+const searchContact = async () =>{
+  const searchInput = document.querySelector("#searchdata")
+  searchInput.addEventListener('input', e =>{
+    const value = e.target.value.toLowerCase();
+    users.forEach(user => {
+      const isVisible = user.name.toLowerCase().includes(value) || user.last.toLowerCase().includes(value)
+      user.element.classList.toggle("invisible", !isVisible)
+      if (isVisible) {
+        user.element.style.order = -1; // move matching user to the top
+      } else {
+        user.element.style.order = ""; // reset order for non-matching users
+      }
+    })
+  })
+}
+
+const addressSearch = async () => {
+  const addressInput = document.querySelector("#searchaddress")
+  addressInput.addEventListener('input', e =>{
+  const value = e.target.value.toLowerCase()
+
+})
 }

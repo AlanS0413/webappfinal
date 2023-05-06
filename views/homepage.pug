@@ -1,15 +1,30 @@
 extends layout.pug
-
+mixin getContactList(contact)
+    ul
+        each contact in contacts
+            li
 block content
         body
-            .container#listcontainer.rounded.padded
-                .row.align-items-center
-                    .col-6.text-begin
-                        h1
-                            b Contact List
-                    .col-6.text-end.padded
-                        a.btn.btn-outline-primary.btn-md(href= '/create') Create a new contact
-                ul#contact-list-item.list-group.text-center
+                .container
+                    h1.mt-12
+                        b Contact List
+                        a.my-auto.btn.btn-outline-primary.btn-md(href= '/create' class="btn-move-right") Create a new contact
+
+                        ul#contact-list.list-group.text-center.pointer
+                            li
+
+                .container.text-center
+                    h5
+                        b Address Search
+                    form#address.form.mx-auto.rounded.search-container(action="/contactsearch", method = "post")
+                        input#searchaddress.form-control( type="search", placeholder="Address Search", aria-label="Address Search")
+                        select#miles.form-select(name ="radius" aria-label="radius")
+                                option(disabled, selected) Radius
+                                option(value="1") 5 Miles
+                                option(value="2") 10 Miles
+                                option(value="3") 25 Miles
+
+                        button.btn.btn-outline-success.my-2.text-center(type="submit") Locate
 
                 .container.my-2.rounded.padded
                     #map-container
@@ -20,5 +35,7 @@ block content
                 script.
                     map_init();
                     loadPlaces();
+                    searchContact();
+                    addressSearch();
 
 
