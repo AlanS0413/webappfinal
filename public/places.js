@@ -1,6 +1,7 @@
-
+let users = []
 const markers = [];
 let map;
+
 function addMarker(){
 $.ajax({
   url: '/data',
@@ -47,7 +48,7 @@ const on_row_click = (e) => {
 const viewContact = async (id) => {
   window.location.href = `/${id}`;
 }
-let users = []
+
 const loadPlaces = async () => {
   const response = await axios.get('/data');
   const ubody = document.querySelector('ul#contact-list')
@@ -79,7 +80,6 @@ const loadPlaces = async () => {
     `;
     ubody.appendChild(listitem);
     users.push({ name: item.firstname, last: item.lastname, element: listitem });
-    console.log(item.lat, item.lng, "items")
     }
   }
   addMarker()
@@ -110,12 +110,4 @@ const searchContact = async () =>{
       }
     })
   })
-}
-
-const addressSearch = async () => {
-  const addressInput = document.querySelector("#searchaddress")
-  addressInput.addEventListener('input', e =>{
-  const value = e.target.value.toLowerCase()
-
-})
 }

@@ -135,8 +135,13 @@ class ContactDB{
         ], [{ column: 'id', value: id }])
     }
 
-    async findAddresses(address){
-        const newaddys = await this.db.read('Contact', [{ column: 'address', value: address}]);
+    async findAddresses(street, city, state, zip, country){
+        const newaddys = await this.db.read('Contact',
+        [{ column: 'street', value: street},
+        { column: 'city', value: city},
+        { column: 'state', value: state},
+        { column: 'zip', value: zip},
+        { column: 'country', value: country}]);
         return newaddys;
     }
 
