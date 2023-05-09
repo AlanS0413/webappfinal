@@ -10,7 +10,7 @@ const loggedin = (req, res, next) =>
         next();
     }
     else{
-        res.status(401).send('Not authorized');
+        res.status(401).send('<div style="text-align:center;"><h1>Who do you think we are wikipedia?? You have to sign up for that!</h1><p><a href="/signup"><button class="btn btn-outline-primary">Sign Up</button></a></p></div>');
     }
 }
 

@@ -9,7 +9,7 @@ const loggedin = (req, res, next) =>
         next();
     }
     else{
-        res.status(401).send('Not authorized');
+        res.status(401).send('<div style="text-align:center;"><h1>Oh I cant let just anyone get rid of my free data! Sign up first! </h1><p><a href="/signup"><button class="btn btn-outline-primary">Sign Up</button></a></p></div>');
     }
 }
 

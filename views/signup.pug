@@ -7,36 +7,32 @@ block content
                     b Sign Up
                     h3
                     p
-                    h.text-white Please select a username, and a password. Don't worry about any password rules here, we don't really care much about protecting your information - so 
-                    b.text-white
-                        code helloworld
-                    h.text-white is just fine by us!
-                    p
+                        b Passwords MUST contain at least one number, one uppercase letter, one lowercase letter, and be at least 8 characters long
                     .row.g-3
                         .col-md-3
                             label(class="form-label", for = 'first') First Name
-                            input(class= "form-control", aria-labelledby="first", name = 'first' required = "")
+                            input(class= "form-control", aria-labelledby="first", name = 'first', title = "First Name" required = "")
 
 
                         .col-md-3
                             label(class="form-label",for = 'last') Last Name
-                            input(class= "form-control", aria-labelledby="last",name = 'last' required= "")
+                            input(class= "form-control", aria-labelledby="last",name = 'last', title = "Last Name" required= "")
                         .col-md-6
                         hr
 
                         .col-md-3
                             label(class="form-label", for = 'username') Username
-                            input(class= "form-control", aria-labelledby="username",type='text', name = 'username' required="")
+                            input(class= "form-control", aria-labelledby="username",type='text', name = 'username', title = "Username" required="")
                         .col-md-9
 
                         .col-md-3
                             label(class="form-label", for = 'password') Password
-                            input(class= "form-control", aria-labelledby="password",type = 'password' name = 'signuppassword' required="")
+                            input(class="form-control", aria-labelledby="password", type='password', name='signuppassword', pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", title="Must contain at least one number, one uppercase letter, one lowercase letter, and be at least 8 characters long", required="")
                         .col-md-9
 
                         .col-md-3
                             label(class="form-label",for = 'confirmpassword') Confirm Password
-                            input(class= "form-control", aria-labelledby="confirmpassword",type = 'password' name = 'confirmpassword' required="")
+                            input(class="form-control", aria-labelledby="password", type='password', name='signuppassword', pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", title="Must contain at least one number, one uppercase letter, one lowercase letter, and be at least 8 characters long", required="")                        
                         .col-md-9
                         hr
 
